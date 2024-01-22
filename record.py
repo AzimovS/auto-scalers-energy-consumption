@@ -2,7 +2,7 @@ from codecarbon import EmissionsTracker
 from time import sleep
 
 tracker = EmissionsTracker(project_name="Test", tracking_mode="machine",
-                           save_to_logger=True, output_file="emissions.csv")
+                           save_to_logger=True, output_file="3pods.csv")
 
 tracker.start()
 while True:
