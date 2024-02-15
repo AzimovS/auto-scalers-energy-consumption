@@ -89,9 +89,6 @@ kubectl wait --for=condition=Available --timeout=600s apiservice v1beta1.externa
 
 ```bash
 kubectl apply -f Application-Deployment/complete-demo.yaml
-
-# note the number of replicas that are ready (Maybe Remove)
-kubectl get hpa -w -n sock-shop-g
 ```
 
 Finally, scale the `different sock-shop microservices` app using KEDA's CPU trigger.
@@ -121,13 +118,11 @@ export WATTTIME_USERNAME="DanB"
 export WATTTIME_PASSWORD="aj)NwBf~IbF+"
 export REGION=westus
 
-helm install carbon-intensity-exporter \
-  --set carbonDataExporter.region=$LOCATION \
-  --set apiServer.username=$WATTTIME_USERNAME \
-  --set apiServer.password=$WATTTIME_PASSWORD \
-  ./charts/carbon-intensity-exporter
-
-
+helm install carbon-intensity-exporter oci://ghcr.io/azure/kubernetes-carbon-intensity-exporter/charts/carbon-intensity-exporter \
+  --version v0.3.0 \
+  --set carbonDataExporter.region=$REGION \
+  --set wattTime.username=$WATTTIME_USERNAME \
+  --set wattTime.password=$WATTTIME_PASSWORD
 
 # go back to repo directory
 cd ../
@@ -240,6 +235,9 @@ kubectl apply -f infrastructure/prometheus/manifests/
 # wait for all the monitoring pods to be running
 kubectl get po -n monitoring -w
 ```
+
+> This deployment can take 10-15 minutes to provision.
+
 
 Assign the `carbon-aware-keda-operator-metrics-reader` cluster role to the Prometheus operator. This allows the Prometheus operator to scrape from the Carbon Aware KEDA Operator's namespace.
 
