@@ -131,17 +131,17 @@ cd ../
 Verify carbon intensity data is in place.
 
 ```bash
-# ensure the status of the carbon intensity exporter operator pod is running
+# ensure the status of the carbon intensity exporter operator pod is running (It will take around 5 mins)
 kubectl get po -n kube-system -l app.kubernetes.io/name=carbon-intensity-exporter
 
-# get configmap data SHOULD BE FIXED
+# get configmap data (Wait for another 3-5 minutes intil it shows the data)
 kubectl get cm -n kube-system carbon-intensity -o jsonpath='{.data}' | jq
 ```
 
 You can view the carbon intensity values with the following command.
 
 ```bash
-# get carbon intensity binary data SHOULD BE FIXED
+# get carbon intensity binary data
 kubectl get cm -n kube-system carbon-intensity -o jsonpath='{.binaryData.data}' | base64 --decode | jq
 ```
 
@@ -265,15 +265,9 @@ Download the sample dashboard [here](https://github.com/Azure/carbon-aware-keda-
 
 Expand the **Dashboards** menu item and click the **+ Import** button.
 
-![grafana dashboard import](../assets/images/grafana-import.png)
-
 Upload the **Carbon Aware KEDA-Dashboard.json** file and select **prometheus** as the data source then click Import.
 
-![grafana dashboard datasource](../assets/images/grafana-dashboard.png)
-
 You will be able to view the default max replicas, and the max replicas ceiling being raised and lowered over time based on the carbon intensity rating.
-
-![carbon aware dashboard](../assets/images/carbon-aware-dashboard.png)
 
 ## Clean up
 
