@@ -105,12 +105,6 @@ To test with real data from the Carbon Aware SDK, head over to this [repo](https
 
 If you do not have WattTime API credentials you can skip this step and still test this operator using mock carbon intensity data
 
-```bash
-git clone https://github.com/Azure/kubernetes-carbon-intensity-exporter.git
-cd kubernetes-carbon-intensity-exporter
-```
-# wait a few seconds and note the number of replicas that are ready now
-kubectl get hpa -w -n sock-shop-g
 Using Helm, install the Carbon Intensity Exporter Operator into the AKS cluster.
 
 ```bash
@@ -268,6 +262,49 @@ Expand the **Dashboards** menu item and click the **+ Import** button.
 Upload the **Carbon Aware KEDA-Dashboard.json** file and select **prometheus** as the data source then click Import.
 
 You will be able to view the default max replicas, and the max replicas ceiling being raised and lowered over time based on the carbon intensity rating.
+
+To get an access to prometheus, you can use port-forward:
+
+```bash
+kubectl port-forward service/prometheus-k8s -n monitoring 9090:9090
+```
+After this document, you will be able to access prometheus on http://localhost:9090/. 
+
+
+To get an access to the website, get url with this command:
+
+```bash
+echo "http://$(kubectl get svc frontend-external -n sock-shop-g -o jsonpath='{.status.loadBalancer.ingress[0].ip}')"
+```
+Important. It might need some time, so try to access it several times.
+
+## Load testing
+
+For the load testing part, you can navigate start the following file (make sure that you installed locust package):
+
+```bash
+locust -f locust.py
+```
+
+After starting, you can navigate to http://0.0.0.0:8089/, where you can indicate, number of users, spawn rate, and host.
+
+# Machine learning part
+
+To save the data from prometheus. Navigate to ml directory and run save_data.py file (where it will save the data every minute). Make sure that you installed necessary packages
+
+```bash
+cd ml
+
+python save_data.py
+```
+
+It will save data to data_points.csv file, then you can start machine learning part with the following command:
+
+```bash
+python ml.py
+```
+Also, you can choose the machine learning algorithm in model_choice variable and get accuracy. 
+
 
 ## Clean up
 
