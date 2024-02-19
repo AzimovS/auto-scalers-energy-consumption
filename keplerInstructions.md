@@ -31,7 +31,7 @@ cd ../../
 
 ```
 
-> This deployment can take 5 minutes to provision.
+> This deployment can take 5-10 minutes to provision.
 
 <br/>
 
@@ -94,9 +94,6 @@ kubectl port-forward service/prometheus-k8s -n monitoring 9090:9090
 ```
 
 This will run the pods required for monitoring using Prometheus and Grafana. We can then use port-forwarding to access the Prometheus Web application and Grafana dashboard locally.
-```bash
-kubectl port-forward service/prometheus-k8s --namespace=monitoring 9090:9090
-```
 
 ```bash
 kubectl port-forward service/grafana --namespace=monitoring 3000:3000
