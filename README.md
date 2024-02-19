@@ -1,42 +1,18 @@
-# auto-scalers-energy-consumption
-
 <h1 align="center">Autoscalers Energy Eonsumption</h1>
 
+This repository for the Software Engineering for Autonomous Systems course. Each branch within this repository is dedicated to a specific experiment or project.
 
-### Installation
 
-1. Clone the repo:
-   ````sh
-   git clone https://github.com/AzimovS/auto-scalers-energy-consumption
-   ```sh
-   ````
-2. Install the required dependencies:
-   ```sh
-   pip3 install -r requirements.txt
-   ```
-3. Start a flask application:
-   ```sh
-   python main.py
-   ```
-4. Start locust:
-   ```sh
-   locust -f locust.py
-   ```
-   Indicate the number of users, rate, and host (http://127.0.0.1:5000/)
-5. Start codecarbon:
-   ```sh
-   python record.py
-   ```
-   It will create (or append to existing one) emissions.csv file with your hardware electricity power consumption. Wait at least for 20 seconds before proceeding to the next step.
-6. Start prediction:
-   ```sh
-   python ml.py
-   ```
-   It will create example.csv file with the predicted and actual values.
+## Branches
 
-### Built With
+- **sockshopKeda**: Contains the instructions how to deploy Sockshop application with Kepler or Azure Services
+- **tea_store**: Contains the instructions how to deploy TeaStore application
+- **TrackFlaskAppEmissions**: Contains the instructions how to start flask application, start load testing, record emission and predict future emissions.
+- **TrackFlaskAppEmissionsNumPods**: The same as TrackFlaskAppEmissions, but it contains the data, when there were used different number of replicas.
 
-- [Python](https://www.python.org/)
-- [Locust](https://locust.io/)
-- [RiverML](https://riverml.xyz/latest/)
-- [CodeCarbon](https://github.com/mlco2/codecarbon)
+## Getting Started
+
+To get started with any experiment or project, switch to the respective branch using git:
+
+```bash
+git checkout <branch-name>
