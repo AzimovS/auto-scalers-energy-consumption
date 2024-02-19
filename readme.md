@@ -3,7 +3,7 @@
 
 This repository contains instructions how to deploy:
 * Sockshop application with Azure Kubernetes Service (kedaInstructions.md)
-* Sockshop application with KEPLER
+* Sockshop application with KEPLER (keplerInstructions.md)
 
 The [original work](https://github.com/HabsB/Green-Autoscaling)
 
