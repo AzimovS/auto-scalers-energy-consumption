@@ -1,36 +1,14 @@
-# Install with Azure Kubernetes Service
-
-## Prerequisites
-
-* An Azure Subscription (e.g. [Free](https://aka.ms/azure-free-account) or [Student](https://aka.ms/azure-student-account) account)
-* [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) with [Azure Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/install#azure-cli) installed
-* [Git CLI](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-* [`kubectl` CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
-* [Helm CLI](https://helm.sh/docs/intro/install/)
-* Bash shell (e.g. macOS, Linux, [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/windows/wsl/about), [Multipass](https://multipass.run/), [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/quickstart), [GitHub Codespaces](https://github.com/features/codespaces), etc)
-* OPTIONAL: [Terraform CLI](https://www.terraform.io/downloads)
-
-> If you do not have all the tools listed above, you can launch the [GitHub Codespaces](https://github.com/features/codespaces) environment which has all the tools pre-installed.
-
-## Clone repo
-
-Use Git CLI to clone this repo and drop into the directory
-<!-- 
-# To fix
-```bash
-git clone https://github.com/HabsB/Green-Autoscaling/tree/main/greenScalingversion
-cd Green-Autoscaling
-``` -->
+# Install Sockshop application with Azure Kubernetes Service
 
 ## Deploy Azure Infrastructure
 
 You have to deploy Azure resources using Terraform.
 
-> Regardless of the option you choose, you will need to login to Azure using the `az login` command before you begin
+> You will need to login to Azure using the `az login` command before you begin
 
 ## Terraform
 
-This repo includes a sample terraform file to deploy Azure Cache for Redis and Azure Kubernetes Service with the following commands
+This repo includes a sample terraform file to deploy Sockshop application and Azure Kubernetes Service with the following commands
 
 ```bash
 # drop into proper directory
@@ -69,10 +47,6 @@ Test your connectivity to the AKS cluster.
 ```bash
 kubectl cluster-info
 ```
-## Install KEPLER
-
-Detailed energy consumption measurement at a granular level (energy consumption per pod) using Kepler to assess the autoscaler’s impact on individual pods. the deployment detail of Kepler is provided in the following link[https://sustainable-computing.io/installation/kepler/]
-
 
 ## Install KEDA
 
@@ -117,9 +91,6 @@ helm install carbon-intensity-exporter oci://ghcr.io/azure/kubernetes-carbon-int
   --set carbonDataExporter.region=$REGION \
   --set wattTime.username=$WATTTIME_USERNAME \
   --set wattTime.password=$WATTTIME_PASSWORD
-
-# go back to repo directory
-cd ../
 ```
 
 Verify carbon intensity data is in place.
