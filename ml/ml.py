@@ -6,14 +6,14 @@ from sklearn.metrics import mean_squared_error
 from keras.models import Sequential
 from keras.layers import LSTM, GRU, Dense
 
-df = pd.read_csv('data_points.csv')
+df = pd.read_csv('data_points_keda.csv')
 
 timestamps = df['Timestamp'].values.reshape(-1, 1)
 values = df['Value'].values
 
-X_train, X_test, y_train, y_test = train_test_split(timestamps, values, test_size=0.2, shuffle=False)
+X_train, X_test, y_train, y_test = train_test_split(timestamps, values, test_size=0.1, shuffle=False)
 
-model_choice = '1'
+model_choice = '2'
 
 if model_choice == '1':  # Linear Regression
     model = LinearRegression()
@@ -21,6 +21,8 @@ if model_choice == '1':  # Linear Regression
     y_pred = model.predict(X_test)
     mse = mean_squared_error(y_test, y_pred)
     print("Mean Squared Error on Test Set (Linear Regression):", mse)
+    mape = np.mean(np.abs((y_test - y_pred) / y_test)) * 100
+    print("Mean Absolute Percentage Error on Test Set (Linear Regression):", mape)
 
 elif model_choice == '2':  # LSTM
     X_train_lstm = X_train.reshape((X_train.shape[0], 1, X_train.shape[1]))
@@ -36,6 +38,8 @@ elif model_choice == '2':  # LSTM
     y_pred_lstm = model.predict(X_test_lstm)
     mse_lstm = mean_squared_error(y_test, y_pred_lstm)
     print("Mean Squared Error on Test Set (LSTM):", mse_lstm)
+    mape = np.mean(np.abs((y_test - y_pred_lstm) / y_test)) * 100
+    print("Mean Absolute Percentage Error on Test Set (LSTM):", mape)
 
 elif model_choice == '3':  # GRU
     X_train_gru = X_train.reshape((X_train.shape[0], 1, X_train.shape[1]))
@@ -51,6 +55,8 @@ elif model_choice == '3':  # GRU
     y_pred_gru = model.predict(X_test_gru)
     mse_gru = mean_squared_error(y_test, y_pred_gru)
     print("Mean Squared Error on Test Set (GRU):", mse_gru)
+    mape = np.mean(np.abs((y_test - y_pred_gru) / y_test)) * 100
+    print("Mean Absolute Percentage Error on Test Set (GRU):", mape)
 
 else:
     print("Invalid choice. Please choose 1 for Linear Regression, 2 for LSTM, or 3 for GRU.")
