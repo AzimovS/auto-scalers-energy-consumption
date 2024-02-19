@@ -140,10 +140,10 @@ To save the data from prometheus. Navigate to ml directory and run save_data.py 
 ```bash
 cd ml
 
-python save_data.py
+python save_data_kepler.py
 ```
 
-It will save data to data_points.csv file, then you can start machine learning part with the following command:
+It will save data to data_points_kepler.csv file, then you can start machine learning part with the following command:
 
 ```bash
 python ml.py
