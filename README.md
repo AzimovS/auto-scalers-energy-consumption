@@ -1,4 +1,4 @@
-<h1 align="center">Autoscalers Energy Eonsumption</h1>
+<h1 align="center">Autoscalers Energy Consumption</h1>
 
 This repository for the Software Engineering for Autonomous Systems course. Each branch within this repository is dedicated to a specific experiment or project.
 
